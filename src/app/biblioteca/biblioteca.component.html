@@ -11,7 +11,7 @@
   </thead>
   <tbody>
     <tr *ngFor="let libro of biblioteca | filter: searchText" (click)='selecciona(libro)'>
-      <th scope="row"><span>'icon' </span>{{ libro.id }}</th>
+      <th scope="row"><i class="material-icons">book</i>{{ libro.id }}</th>
       <td>
       	<!--la etiqueta <ngb-highlight> resalta el texto que coincide con el buscado-->
       	<ngb-highlight [result]="libro.title" [term]="searchText"></ngb-highlight>
