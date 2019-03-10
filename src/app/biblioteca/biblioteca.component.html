@@ -10,12 +10,27 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let libro of biblioteca | filter: searchText">
-      <th scope="row">{{ libro.id }}</th>
-      <td>{{ libro.title }}</td>
-      <td>{{ libro.autor }}</td>
-      <td>{{ libro.editorial }}</td>
-      <td><ngb-rating [rate]="3"></ngb-rating></td>
+    <tr *ngFor="let libro of biblioteca | filter: searchText" (click)='selecciona(libro)'>
+      <th scope="row"><span>'icon' </span>{{ libro.id }}</th>
+      <td>
+      	<!--la etiqueta <ngb-highlight> resalta el texto que coincide con el buscado-->
+      	<ngb-highlight [result]="libro.title" [term]="searchText"></ngb-highlight>
+      </td>
+      <td>
+      	<ngb-highlight [result]="libro.autor" [term]="searchText"></ngb-highlight>
+      </td>
+      <td>
+      	<ngb-highlight [result]="libro.editorial" [term]="searchText"></ngb-highlight>
+      </td>
+      <td>
+      	<!--bloque para mostrar las valoraciones-->
+      	<ngb-rating [rate]="libro.getValoracion()" max="5" readonly="true">
+      		<ng-template let-fill="fill" let-index="index">
+      			<span class="star" [class.filled]="fill === 100">&#9733;</span>
+      		</ng-template>   	
+      	</ngb-rating>
+
+  	  </td>
     </tr>
   </tbody>
 </table>

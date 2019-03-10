@@ -1,28 +1,68 @@
 
 <div class="container border">
+
   <div class="row bg-dark text-light">
+    <!--título-->
     <div class="col-8 p-3">
-      <p>Biblioteca</p>
+      'icon'
+      Biblioteca
     </div>
+
+    <!--caja de búsqueda-->
     <div class="col-4 p-3">
       <form>
-        <input type="text" placeholder="search" name="search" [(ngModel)]="searchText">
+        <input type="text" placeholder="Search" name="search" [(ngModel)]="searchText">
       </form>
     </div>
-    
+
   </div>
+
+  <!--botón nuevo-->
   <div class="row justify-content-end">
-    <div class="col-1 m-3">
-      <button type="button" class="btn btn-outline-primary">Nuevo</button>
+    <div class="col-1">
+      <button type="button" class="btn btn-outline-primary" (click)="nuevoLibro()">Nuevo</button>
     </div>
   </div>
 
-  <div class="col m-2 border">
-
-    <!--incluimos el componente biblioteca.component pasándole el
-     término de búsqueda 'searchText' como parámetro -->
-    <app-biblioteca [searchText]="searchText"></app-biblioteca>
-
+  <!--listado de libros-->
+  <div class="row">
+    <div class="col m-2">
+      <!--incluimos el componente biblioteca.component pasándole el
+      término de búsqueda 'searchText' como parámetro
+      Además asignamos el método 'mostrarLibroSeleccionado' al evento de BibliotecaComponent -->
+      <app-biblioteca [searchText]="searchText" (libroSeleccionado)="mostrarLibroSeleccionado($event)"></app-biblioteca>
+    </div>
   </div>
+
+  
+  <div *ngIf="visible" class="row bg-light justify-content-end">
+      <div class="col-1">'icon'</div>
+  </div>
+  <!--formulario para añadir/editar libros-->
+  <div *ngIf="visible" class="row bg-light">
+    <form class="col" #formBiblioteca="ngForm" (ngSubmit)="onSubmit(formBiblioteca)">
+
+      <div class="form-row">
+        <div class="form-group col-4">
+          <label for="title">Title</label>
+          <input type="text" id="title" name="title" class="form-control" [(ngModel)]="libro.title" #title="ngModel" placeholder="Title" required>
+        </div>
+        <div class="form-group col-4">
+          <label for="title">Author</label>
+          <input type="text" id="author" name="author" class="form-control" #author="ngModel" [(ngModel)]="libro.autor" placeholder="Author" required>
+        </div>
+        <div class="form-group col-4">
+          <label for="title">Editorial</label>
+          <input type="text" id="editorial" name="editorial" class="form-control" #editorial="ngModel" [(ngModel)]="libro.editorial" placeholder="Editorial" required>
+        </div>
+      </div>
+
+      <div class="form-row justify-content-end">
+        <button type="submit" [disabled]="!formBiblioteca.form.valid" class="btn btn-outline-success">Guardar</button>
+      </div>
+
+    </form>
+  </div>
+
 
 </div>

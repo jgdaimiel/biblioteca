@@ -1,6 +1,6 @@
 import { Libro } from "./libro";
 
-export const biblioteca_prueba : Libro[] =
+export const biblioteca_prueba : any[] =
 [{
         id: "1",
         title: "El alquimista",

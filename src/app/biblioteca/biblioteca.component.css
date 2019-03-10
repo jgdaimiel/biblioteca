@@ -1,0 +1,13 @@
+.table td{
+	cursor: pointer;
+}
+
+
+/* estilos para las estrellas de las valoraciones */
+.star{
+	font-size: 1.3rem;
+}
+
+.filled{
+	color: yellow;
+}
